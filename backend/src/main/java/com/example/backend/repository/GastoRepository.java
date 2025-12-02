@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface GastoRepository extends JpaRepository<Gasto, Long> {
     List<Gasto> findByCategoria(String categoria);
+
     List<Gasto> findByFechaBetween(LocalDate startDate, LocalDate endDate);
+
     List<Gasto> findByDescripcionContainingIgnoreCase(String descripcion);
 }
