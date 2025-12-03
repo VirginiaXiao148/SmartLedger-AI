@@ -9,6 +9,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -20,6 +23,8 @@ import com.example.backend.repository.GastoRepository;
 
 @Service
 public class GastoService {
+
+    private static final Logger log = LoggerFactory.getLogger(GastoService.class);
 
     private GastoRepository gastoRepository;
     private final Dotenv dotenv;
@@ -111,6 +116,9 @@ public class GastoService {
                     .path("text").asText();
             String content = contentNode.replace("```json", "").replace("```", "").trim();
 
+            System.out.println("Gemini raw response: " + content);
+            log.info("Gemini raw response: " + content);
+            
             // Parse JSON
             JsonNode gastoNode = objectMapper.readTree(content);
 
