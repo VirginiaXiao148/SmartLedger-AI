@@ -84,13 +84,13 @@ public class GastoService {
             System.out.println("URL: " + url);
             // Create HTTP client
             HttpClient client = HttpClient.newHttpClient();
-            
+
             // Gemini prompt
             String prompt = "Analiza este gasto: '" + textoOriginal.replace("\"", "") + "'. " +
                     "Devuelve un JSON con: categoria (Alimentación, Transporte, Ocio, Casa, Otros), " +
                     "importe (número), descripcion (texto breve). " +
                     "Ejemplo: {\"categoria\": \"Ocio\", \"importe\": 10.5, \"descripcion\": \"Cine\"}";
-            
+
             // Request body
             String requestBody = "{ \"contents\": [{ \"parts\": [{ \"text\": \"" + prompt + "\" }] }] }";
 
