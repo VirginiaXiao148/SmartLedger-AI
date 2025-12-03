@@ -78,8 +78,10 @@ public class GastoService {
         try {
             // Gemini API key
             String apiKey = dotenv.get("GEMINI_API_KEY");
+            System.out.println("API Key: " + apiKey);
             // Gemini API endpoint
             String url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey;
+            System.out.println("URL: " + url);
             // Create HTTP client
             HttpClient client = HttpClient.newHttpClient();
             
