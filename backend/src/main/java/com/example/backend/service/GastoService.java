@@ -1,12 +1,5 @@
 package com.example.backend.service;
 
-import com.example.backend.model.Gasto;
-import com.example.backend.repository.GastoRepository;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.cdimascio.dotenv.Dotenv;
-import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -15,6 +8,15 @@ import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.github.cdimascio.dotenv.Dotenv;
+import com.example.backend.model.Gasto;
+import com.example.backend.repository.GastoRepository;
 
 @Service
 public class GastoService {
@@ -102,7 +104,7 @@ public class GastoService {
 
             // Process response
             JsonNode jsonNode = objectMapper.readTree(response.body());
-            JsonNode contentNode = jsonNode.path("candidates").get(0)
+            String contentNode = jsonNode.path("candidates").get(0)
                     .path("content").path("parts").get(0)
                     .path("text").asText();
             String content = contentNode.replace("```json", "").replace("```", "").trim();

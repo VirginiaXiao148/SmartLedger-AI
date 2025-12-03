@@ -34,7 +34,7 @@ public class GastoController {
     }
 
     @GetMapping("/{id}")
-    public Gasto findById(@PathVariable Long id) {
+    public ResponseEntity<Gasto> findById(@PathVariable Long id) {
         return gastoService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
