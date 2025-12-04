@@ -1,30 +1,21 @@
 package com.example.backend.service;
 
-import java.math.BigDecimal;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.genai.Client;
+import com.google.genai.types.GenerateContentResponse;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import com.example.backend.model.Gasto;
-import com.example.backend.repository.GastoRepository;
+import main.java.com.example.backend.model.Gasto;
+import main.java.com.example.backend.repository.GastoRepository;
 
 @Service
 public class GastoService {
-
-    private static final Logger log = LoggerFactory.getLogger(GastoService.class);
 
     private GastoRepository gastoRepository;
     private final Dotenv dotenv;
@@ -80,61 +71,22 @@ public class GastoService {
 
     // Gemini integration
     public Gasto generateGasto(String textoOriginal) {
-        try {
-            // Gemini API key
-            String apiKey = dotenv.get("GEMINI_API_KEY");
-            System.out.println("API Key: " + apiKey);
-            // Gemini API endpoint
-            String url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey;
-            System.out.println("URL: " + url);
-            // Create HTTP client
-            HttpClient client = HttpClient.newHttpClient();
+        Client client = new Client();
 
-            // Gemini prompt
-            String prompt = "Analiza este gasto: '" + textoOriginal.replace("\"", "") + "'. " +
+        String prompt = "Analiza este gasto: '" + textoOriginal + "'. " +
                     "Devuelve un JSON con: categoria (Alimentación, Transporte, Ocio, Casa, Otros), " +
                     "importe (número), descripcion (texto breve). " +
                     "Ejemplo: {\"categoria\": \"Ocio\", \"importe\": 10.5, \"descripcion\": \"Cine\"}";
 
-            // Request body
-            String requestBody = "{ \"contents\": [{ \"parts\": [{ \"text\": \"" + prompt + "\" }] }] }";
+        GenerateContentResponse response =
+            client.models.generateContent(
+                "gemini-2.5-flash",
+                prompt,
+                null);
 
-            // Request
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(url))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                    .build();
+        System.out.println(response.text());
 
-            // Response
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            // Process response
-            JsonNode jsonNode = objectMapper.readTree(response.body());
-            String contentNode = jsonNode.path("candidates").get(0)
-                    .path("content").path("parts").get(0)
-                    .path("text").asText();
-            String content = contentNode.replace("```json", "").replace("```", "").trim();
-
-            System.out.println("Gemini raw response: " + content);
-            log.info("Gemini raw response: " + content);
-            
-            // Parse JSON
-            JsonNode gastoNode = objectMapper.readTree(content);
-
-            // Create Gasto object
-            return Gasto.builder()
-                    .textoOriginal(textoOriginal)
-                    .categoria(gastoNode.get("categoria").asText())
-                    .descripcion(gastoNode.get("descripcion").asText())
-                    .importe(new BigDecimal(gastoNode.get("importe").asText()))
-                    .fecha(LocalDate.now())
-                    .build();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error conectando con Gemini: " + e.getMessage());
-        }
+        return objectMapper.readValue(response.text(), Gasto.class);
     }
 
 }
