@@ -11,8 +11,8 @@ import com.google.genai.Client;
 import com.google.genai.types.GenerateContentResponse;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import main.java.com.example.backend.model.Gasto;
-import main.java.com.example.backend.repository.GastoRepository;
+import com.example.backend.model.Gasto;
+import com.example.backend.repository.GastoRepository;
 
 @Service
 public class GastoService {
