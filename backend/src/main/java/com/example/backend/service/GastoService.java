@@ -74,19 +74,38 @@ public class GastoService {
         Client client = new Client();
 
         String prompt = "Analiza este gasto: '" + textoOriginal + "'. " +
-                    "Devuelve un JSON con: categoria (Alimentación, Transporte, Ocio, Casa, Otros), " +
-                    "importe (número), descripcion (texto breve). " +
-                    "Ejemplo: {\"categoria\": \"Ocio\", \"importe\": 10.5, \"descripcion\": \"Cine\"}";
+                "Devuelve un JSON con: categoria (Alimentación, Transporte, Ocio, Casa, Otros), " +
+                "importe (número), descripcion (texto breve). " +
+                "Ejemplo: {\"categoria\": \"Ocio\", \"importe\": 10.5, \"descripcion\": \"Cine\"}";
 
-        GenerateContentResponse response =
-            client.models.generateContent(
-                "gemini-2.5-flash",
-                prompt,
-                null);
+        try {
+            GenerateContentResponse response =
+                client.models.generateContent(
+                    "gemini-2.5-flash",
+                    prompt,
+                    null);
 
-        System.out.println(response.text());
+            String responseText = response.text();
+            System.out.println(responseText);
 
-        return objectMapper.readValue(response.text(), Gasto.class);
+            // Opcional: limpiar la respuesta si el modelo devuelve texto extra
+            String json = extractJson(responseText);
+
+            return objectMapper.readValue(json, Gasto.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Manejo de error: podrías lanzar una excepción personalizada o devolver null
+            return null;
+        }
+    }
+
+    private String extractJson(String text) {
+        int start = text.indexOf('{');
+        int end = text.lastIndexOf('}');
+        if (start != -1 && end != -1 && end > start) {
+            return text.substring(start, end + 1);
+        }
+        return text; // Devuelve el texto original si no encuentra JSON
     }
 
 }
