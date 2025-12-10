@@ -71,6 +71,7 @@ public class GastoService {
 
     // Gemini integration
     public Gasto generateGasto(String textoOriginal) {
+        // El cliente obtiene la clave de la variable de entorno `GEMINI_API_KEY`.
         Client client = new Client();
 
         String prompt = "Analiza este gasto: '" + textoOriginal + "'. " +
@@ -81,7 +82,7 @@ public class GastoService {
         try {
             GenerateContentResponse response =
                 client.models.generateContent(
-                    "gemini-2.5-flash",
+                    "gemini-1.5-flash",
                     prompt,
                     null);
 
