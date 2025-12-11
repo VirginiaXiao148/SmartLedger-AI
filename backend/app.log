@@ -232,3 +232,11 @@ java.lang.NullPointerException: null
 2025-12-11T20:02:11.609+01:00  WARN 23756 --- [backend] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 2025-12-11T20:02:12.129+01:00  INFO 23756 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
 2025-12-11T20:02:12.137+01:00  INFO 23756 --- [backend] [main] com.example.backend.BackendApplication   : Started BackendApplication in 5.465 seconds (process running for 6.595)
+2025-12-11T20:03:58.293+01:00  INFO 23756 --- [backend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-11T20:03:58.293+01:00  INFO 23756 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-11T20:03:58.297+01:00  INFO 23756 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-12-11T20:12:16.717+01:00  INFO 23756 --- [backend] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-11T20:12:16.730+01:00  INFO 23756 --- [backend] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-11T20:12:16.733+01:00  INFO 23756 --- [backend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-11T20:12:16.738+01:00  INFO 23756 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-11T20:12:16.740+01:00  INFO 23756 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

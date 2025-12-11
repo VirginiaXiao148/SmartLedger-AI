@@ -89,7 +89,7 @@ public class GastoService {
                                 .build();
             GenerateContentResponse response =
                 client.models.generateContent(
-                    "gemini-1.5-flash",
+                    "gemini-2.0-flash",
                     prompt,
                     null);
 
