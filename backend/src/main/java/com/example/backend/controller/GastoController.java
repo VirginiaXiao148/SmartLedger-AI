@@ -24,6 +24,7 @@ public class GastoController {
     @PostMapping("/analizar")
     public ResponseEntity<Gasto> analyzeGasto(@RequestBody String textoOriginal) {
         Gasto gastoAnalizado = gastoService.generateGasto(textoOriginal);
+        System.out.println("Gasto generado: " + gastoAnalizado);
         return ResponseEntity.ok(gastoAnalizado);
     }
 
