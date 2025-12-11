@@ -1,11 +1,13 @@
 package com.example.backend.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.genai.Client;
 import com.google.genai.types.GenerateContentResponse;
@@ -71,42 +73,45 @@ public class GastoService {
 
     // Gemini integration
     public Gasto generateGasto(String textoOriginal) {
-        // El cliente obtiene la clave de la variable de entorno `GEMINI_API_KEY`.
-        Client client = new Client();
-
+        
         String prompt = "Analiza este gasto: '" + textoOriginal + "'. " +
                 "Devuelve un JSON con: categoria (Alimentación, Transporte, Ocio, Casa, Otros), " +
                 "importe (número), descripcion (texto breve). " +
                 "Ejemplo: {\"categoria\": \"Ocio\", \"importe\": 10.5, \"descripcion\": \"Cine\"}";
 
         try {
+            String apiKey = dotenv.get("GEMINI_API_KEY");
+            if (apiKey == null || apiKey.isEmpty()) {
+                throw new RuntimeException("Falta la API KEY en .env");
+            }
+            Client client = Client.builder()
+                                .apiKey(apiKey)
+                                .build();
             GenerateContentResponse response =
                 client.models.generateContent(
-                    "gemini-1.5-flash",
+                    "gemini-2.0-flash",
                     prompt,
                     null);
 
             String responseText = response.text();
-            System.out.println(responseText);
+            System.out.println("Respuesta Gemini: " + responseText);
 
-            // Opcional: limpiar la respuesta si el modelo devuelve texto extra
-            String json = extractJson(responseText);
+            // Limpiar la respuesta para extraer el JSON
+            String jsonLimpio = responseText.replace("```json", "").replace("```", "").trim();
+            JsonNode gastoNode = objectMapper.readTree(jsonLimpio);
 
-            return objectMapper.readValue(json, Gasto.class);
+            return Gasto.builder()
+                    .textoOriginal(textoOriginal)
+                    .categoria(gastoNode.path("categoria").asText("Otros"))
+                    .descripcion(gastoNode.path("descripcion").asText("Sin descripción"))
+                    .importe(new BigDecimal(gastoNode.path("importe").asText("0.0")))
+                    .fecha(LocalDate.now())
+                    .build();
         } catch (Exception e) {
             e.printStackTrace();
             // Manejo de error: podrías lanzar una excepción personalizada o devolver null
             return null;
         }
-    }
-
-    private String extractJson(String text) {
-        int start = text.indexOf('{');
-        int end = text.lastIndexOf('}');
-        if (start != -1 && end != -1 && end > start) {
-            return text.substring(start, end + 1);
-        }
-        return text; // Devuelve el texto original si no encuentra JSON
     }
 
 }
