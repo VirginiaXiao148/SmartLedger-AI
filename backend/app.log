@@ -240,3 +240,38 @@ java.lang.NullPointerException: null
 2025-12-11T20:12:16.733+01:00  INFO 23756 --- [backend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-12-11T20:12:16.738+01:00  INFO 23756 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-12-11T20:12:16.740+01:00  INFO 23756 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-11T20:44:24.802+01:00  INFO 24036 --- [backend] [main] com.example.backend.BackendApplication   : Starting BackendApplication using Java 25.0.1 with PID 24036 (C:\Users\Usuario\Documents\GitHub\SmartLedger AI\backend\target\classes started by Usuario in C:\Users\Usuario\Documents\GitHub\SmartLedger AI\backend)
+2025-12-11T20:44:24.806+01:00  INFO 24036 --- [backend] [main] com.example.backend.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-12-11T20:44:25.739+01:00  INFO 24036 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-11T20:44:25.811+01:00  INFO 24036 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 1 JPA repository interface.
+2025-12-11T20:44:26.348+01:00  INFO 24036 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2025-12-11T20:44:26.367+01:00  INFO 24036 --- [backend] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-11T20:44:26.367+01:00  INFO 24036 --- [backend] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-11T20:44:26.439+01:00  INFO 24036 --- [backend] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1566 ms
+2025-12-11T20:44:26.578+01:00  INFO 24036 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-11T20:44:26.798+01:00  INFO 24036 --- [backend] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:b61298ea-61f3-41d6-9502-bc3162489cc1 user=SA
+2025-12-11T20:44:26.800+01:00  INFO 24036 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-11T20:44:26.838+01:00  INFO 24036 --- [backend] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-11T20:44:26.892+01:00  INFO 24036 --- [backend] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-11T20:44:27.406+01:00  INFO 24036 --- [backend] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-11T20:44:27.502+01:00  INFO 24036 --- [backend] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:b61298ea-61f3-41d6-9502-bc3162489cc1]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: B61298EA-61F3-41D6-9502-BC3162489CC1/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-11T20:44:28.551+01:00  INFO 24036 --- [backend] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-11T20:44:28.594+01:00  INFO 24036 --- [backend] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-11T20:44:28.685+01:00  INFO 24036 --- [backend] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-11T20:44:28.897+01:00  WARN 24036 --- [backend] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-11T20:44:29.241+01:00  INFO 24036 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2025-12-11T20:44:29.247+01:00  INFO 24036 --- [backend] [main] com.example.backend.BackendApplication   : Started BackendApplication in 4.978 seconds (process running for 5.605)
+2025-12-11T20:44:41.870+01:00  INFO 24036 --- [backend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-11T20:44:41.872+01:00  INFO 24036 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-11T20:44:41.873+01:00  INFO 24036 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
