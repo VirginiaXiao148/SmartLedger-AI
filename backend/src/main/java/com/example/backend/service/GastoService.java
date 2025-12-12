@@ -100,16 +100,16 @@ public class GastoService {
             String jsonLimpio = responseText.replace("```json", "").replace("```", "").trim();
             JsonNode gastoNode = objectMapper.readTree(jsonLimpio);
 
-            return Gasto.builder()
+            Gasto nuevoGasto = Gasto.builder()
                     .textoOriginal(textoOriginal)
                     .categoria(gastoNode.path("categoria").asText("Otros"))
                     .descripcion(gastoNode.path("descripcion").asText("Sin descripción"))
                     .importe(new BigDecimal(gastoNode.path("importe").asText("0.0")))
                     .fecha(LocalDate.now())
                     .build();
+            return gastoRepository.save(nuevoGasto);
         } catch (Exception e) {
             e.printStackTrace();
-            // Manejo de error: podrías lanzar una excepción personalizada o devolver null
             return null;
         }
     }
