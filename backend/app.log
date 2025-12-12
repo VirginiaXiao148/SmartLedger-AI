@@ -70,3 +70,6 @@
 2025-12-12T14:22:53.228+01:00  WARN 10564 --- [backend] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 2025-12-12T14:22:53.849+01:00  INFO 10564 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
 2025-12-12T14:22:53.859+01:00  INFO 10564 --- [backend] [main] com.example.backend.BackendApplication   : Started BackendApplication in 8.946 seconds (process running for 9.856)
+2025-12-12T15:05:14.728+01:00  INFO 10564 --- [backend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-12T15:05:14.732+01:00  INFO 10564 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-12T15:05:14.755+01:00  INFO 10564 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 22 ms
