@@ -1,6 +1,7 @@
 'use client';
 import { Search, Wallet } from 'lucide-react';
 import { useState } from 'react';
+import Link from 'next/link';
 
 
 
@@ -49,7 +50,7 @@ export default function Home(){
             {/* Cabecera con icono de monedero y titulo */}
             <header className="bg-gray-800 text-white p-4">
                 <Wallet className="w-6 h-6" />
-                <h1 className="text-2xl font-bold">SmartLedger AI</h1>
+                <Link href="/" className="text-2xl font-bold">SmartLedger AI</Link>
             </header>
 
             {/* Barra de busqueda */}
