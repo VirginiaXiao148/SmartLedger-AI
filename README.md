@@ -39,7 +39,8 @@
 
 ## 📸 Capturas de Pantalla
 
-*(Aquí puedes subir las imágenes que me enseñaste. Arrastra tu imagen a la carpeta del proyecto en GitHub y enlázala así: `![Interfaz Web](ruta-de-tu-imagen.png)`)*
+![Home Page](HomePage.jpg)
+![Gastos Page](GastosPage.jpg)
 
 ---
 
@@ -101,4 +102,4 @@ El núcleo del proyecto reside en `GastoService.java`. El flujo es el siguiente:
 **Virginia Toledo Gavagnin**
 *Desarrolladora Full Stack & RPA Developer*
 
-[LinkedIn](https://www.linkedin.com/in/tu-perfil) | [GitHub](https://github.com/tu-usuario)
+[LinkedIn](https://www.linkedin.com/in/virginia-toledo-gavagnin/) | [GitHub](https://github.com/VirginiaXiao148)
