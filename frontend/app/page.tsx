@@ -121,7 +121,7 @@ export default function Home() {
         )}
       </div>
       
-      <p className="mt-8 text-xs text-gray-400">Powered by Spring Boot 4 & Next.js 14</p>
+      <p className="mt-8 text-xs text-gray-400">Powered by Spring Boot 4 & Next.js 16</p>
     </main>
   );
 }
