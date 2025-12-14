@@ -25,7 +25,7 @@ public class GastoService {
 
     public GastoService(GastoRepository gastoRepository) {
         this.gastoRepository = gastoRepository;
-        this.dotenv = Dotenv.load(); // Cargar variables de entorno
+        this.dotenv = Dotenv.configure().ignoreIfMissing().load(); // Cargar variables de entorno si se encuentran en .env
         this.objectMapper = new ObjectMapper(); // Para manejar JSON
     }
 
@@ -80,7 +80,10 @@ public class GastoService {
                 "Ejemplo: {\"categoria\": \"Ocio\", \"importe\": 10.5, \"descripcion\": \"Cine\"}";
 
         try {
-            String apiKey = dotenv.get("GEMINI_API_KEY");
+            String apiKey = System.getenv("GEMINI_API_KEY");
+            if (apiKey == null || apiKey.isEmpty()) {
+                apiKey = dotenv.get("GEMINI_API_KEY");
+            }
             if (apiKey == null || apiKey.isEmpty()) {
                 throw new RuntimeException("Falta la API KEY en .env");
             }
