@@ -13,7 +13,7 @@
 
 ## 🚀 Características Principales
 
-* 🤖 **Clasificación Automática con IA:** Integración con **Google Gemini 1.5 Flash** para analizar descripciones de texto libre (ej: *"Cena con amigos 30€"*) y convertirlas en datos estructurados JSON.
+* 🤖 **Clasificación Automática con IA:** Integración con **Google Gemini 2.5 Flash** para analizar descripciones de texto libre (ej: *"Cena con amigos 30€"*) y convertirlas en datos estructurados JSON.
 * ☕ **Backend Moderno y Robusto:** Construido con **Java 25** y **Spring Boot 4**, siguiendo principios de arquitectura limpia (Controller-Service-Repository).
 * ⚛️ **Frontend Reactivo:** Interfaz de usuario moderna y rápida desarrollada con **Next.js** y **Tailwind CSS**.
 * 💾 **Persistencia de Datos:** Base de datos SQL (H2 en memoria para desarrollo, extensible a PostgreSQL).
@@ -100,6 +100,6 @@ El núcleo del proyecto reside en `GastoService.java`. El flujo es el siguiente:
 ## 👤 Autor
 
 **Virginia Toledo Gavagnin**
-*Desarrolladora Full Stack & RPA Developer*
+*Full Stack Developer & RPA Developer*
 
 [LinkedIn](https://www.linkedin.com/in/virginia-toledo-gavagnin/) | [GitHub](https://github.com/VirginiaXiao148)

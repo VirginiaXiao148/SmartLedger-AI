@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/gastos")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://smart-ledger-ai.vercel.app/")
 public class GastoController {
 
     private GastoService gastoService;
