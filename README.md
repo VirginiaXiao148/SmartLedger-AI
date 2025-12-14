@@ -11,6 +11,22 @@
 
 ---
 
+## 🏗️ Arquitectura del Sistema
+
+```mermaid
+graph TD
+    User([Usuario]) -->|HTTPS| Frontend[Frontend Next.js (Vercel)]
+    Frontend -->|JSON / REST| Backend[Backend Java Spring Boot (Render)]
+    
+    subgraph Cloud Services
+        Backend -->|JPA / JDBC| DB[(PostgreSQL Database)]
+        Backend -->|API Call| AI[Google Gemini AI]
+    end
+
+    classDef deployment fill:#f9f,stroke:#333,stroke-width:2px;
+    class Frontend,Backend,DB,AI deployment;
+```
+
 ## 🚀 Características Principales
 
 * 🤖 **Clasificación Automática con IA:** Integración con **Google Gemini 2.5 Flash** para analizar descripciones de texto libre (ej: *"Cena con amigos 30€"*) y convertirlas en datos estructurados JSON.
