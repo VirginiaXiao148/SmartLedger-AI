@@ -9,10 +9,12 @@ export default function Home(){
 
     const [pagos, setPagos] = useState([]);
     const [busqueda, setBusqueda] = useState('');
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
     
     const fetchPagos = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/gastos');
+            const response = await fetch(`${apiUrl}/api/gastos`);
             
             if (!response.ok) {
                 throw new Error('Error al obtener los pagos');
@@ -29,7 +31,7 @@ export default function Home(){
 
     const buscarGastos = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/api/gastos/buscar?texto=${busqueda}`);
+            const response = await fetch(`${apiUrl}/api/gastos/buscar?texto=${busqueda}`);
             
             if (!response.ok) {
                 throw new Error('Error en la búsqueda');

@@ -21,9 +21,11 @@ export default function Home() {
     setError('');
     setResult(null);
 
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+
     try {
       // Llamada a tu Backend Spring Boot
-      const response = await fetch('http://localhost:8080/api/gastos/analizar', {
+      const response = await fetch(`${apiUrl}/api/gastos/analizar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'text/plain', // Enviamos texto plano, igual que en Postman
