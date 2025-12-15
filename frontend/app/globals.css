@@ -5,28 +5,30 @@
 @tailwind utilities;
 
 :root {
-  /* Fondo principal: Un gris muy, muy claro, casi blanco pero no chillón */
-  --background: 210 40% 98%; /* #f8fafc (Slate 50) */
-  /* Texto principal: Un gris oscuro, no negro puro */
-  --foreground: 222.2 47.4% 11.2%; /* #0f172a (Slate 900) */
-
-  /* Tarjetas y elementos superpuestos: Blanco puro para que destaquen sutilmente sobre el fondo gris claro */
-  --card: 0 0% 100%; /* #ffffff */
+  --background: 210 40% 98%;
+  --foreground: 222.2 47.4% 11.2%;
+  --card: 0 0% 100%;
   --card-foreground: 222.2 47.4% 11.2%;
-
-  /* Color Primario (Tu azul, pero un poco más sofisticado) */
-  --primary: 221.2 83.2% 53.3%; /* #2563eb (Blue 600) */
+  --primary: 221.2 83.2% 53.3%;
   --primary-foreground: 210 40% 98%;
-
-  /* Colores "apagados" para textos secundarios o bordes */
   --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%; /* Un gris medio para descripciones */
-
-  /* Bordes de inputs y tarjetas */
-  --border: 214.3 31.8% 91.4%; /* Slate 200 */
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
-  
-  --radius: 0.75rem; /* 12px */
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
 }
 
 @layer base {
@@ -35,6 +37,7 @@
     border-style: solid;
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 }
