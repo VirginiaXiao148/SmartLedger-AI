@@ -60,7 +60,7 @@ export default function Home(){
         <div className="max-w-4xl mx-auto w-full pt-6">
             
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold text-foreground">Historial de Movimientos</h1>
+                <h1 className="text-3xl font-bold text-foreground">Historial de Gastos</h1>
                 <button 
                     onClick={fetchPagos}
                     className="text-sm text-muted-foreground hover:text-primary flex items-center gap-2 transition-colors"

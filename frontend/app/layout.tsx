@@ -51,7 +51,7 @@ export default function RootLayout({
                 className="flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all font-medium"
               >
                 <LayoutDashboard className="w-5 h-5" />
-                Dashboard
+                Home
               </Link>
               
               <Link 
@@ -60,6 +60,22 @@ export default function RootLayout({
               >
                 <CreditCard className="w-5 h-5" />
                 Historial Gastos
+              </Link>
+
+              <Link 
+                href="/inversiones" 
+                className="flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all font-medium"
+              >
+                <CreditCard className="w-5 h-5" />
+                Historial Inversiones
+              </Link>
+
+              <Link 
+                href="/reportes" 
+                className="flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all font-medium"
+              >
+                <CreditCard className="w-5 h-5" />
+                Reportes
               </Link>
             </nav>
 
