@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 
-export function Page() {
+export default function Page() {
     const [inputText, setInputText] = useState('');
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<any>(null); // Guardaremos el JSON aquí
