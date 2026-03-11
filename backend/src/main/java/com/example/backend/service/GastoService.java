@@ -15,17 +15,23 @@ import com.google.genai.types.GenerateContentResponse;
 import io.github.cdimascio.dotenv.Dotenv;
 import com.example.backend.model.Gasto;
 import com.example.backend.repository.GastoRepository;
+import com.example.backend.repository.PresupuestoRepository;
+
+import com.example.backend.model.Presupuesto;
 
 @Service
 public class GastoService {
 
     private GastoRepository gastoRepository;
+    private PresupuestoRepository presupuestoRepository;
     private final Dotenv dotenv;
     private final ObjectMapper objectMapper;
 
-    public GastoService(GastoRepository gastoRepository) {
+    public GastoService(GastoRepository gastoRepository, PresupuestoRepository presupuestoRepository) {
         this.gastoRepository = gastoRepository;
-        this.dotenv = Dotenv.configure().ignoreIfMissing().load(); // Cargar variables de entorno si se encuentran en .env
+        this.presupuestoRepository = presupuestoRepository;
+        this.dotenv = Dotenv.configure().ignoreIfMissing().load(); // Cargar variables de entorno si se encuentran en
+                                                                   // .env
         this.objectMapper = new ObjectMapper(); // Para manejar JSON
     }
 
@@ -71,9 +77,38 @@ public class GastoService {
         return null;
     }
 
+    // Comprobar que el presupuesto no se exceda
+    public String comprobarEstadoPresupuesto() {
+        // 1. Obtener el límite guardado
+        BigDecimal limite = presupuestoRepository.findFirstByOrderByIdAsc()
+                .map(p -> BigDecimal.valueOf(p.getPresupuestoMensual()))
+                .orElse(BigDecimal.ZERO);
+
+        if (limite.compareTo(BigDecimal.ZERO) == 0)
+            return "Presupuesto no definido";
+
+        // 2. Calcular gastos del mes actual
+        LocalDate inicioMes = LocalDate.now().withDayOfMonth(1);
+        LocalDate finMes = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+
+        List<Gasto> gastosMes = gastoRepository.findByFechaBetween(inicioMes, finMes);
+        BigDecimal totalGastado = gastosMes.stream()
+                .map(Gasto::getImporte)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        // 3. Lógica de alertas
+        if (totalGastado.compareTo(limite) >= 0) {
+            return "¡ALERTA! Has superado tu presupuesto mensual.";
+        } else if (totalGastado.compareTo(limite.multiply(new BigDecimal("0.8"))) >= 0) {
+            return "Cuidado: Has gastado más del 80% de tu presupuesto.";
+        }
+
+        return "Presupuesto bajo control.";
+    }
+
     // Gemini integration
     public Gasto generateGasto(String textoOriginal) {
-        
+
         String prompt = "Analiza este gasto: '" + textoOriginal + "'. " +
                 "Devuelve un JSON con: categoria (Alimentación, Transporte, Ocio, Casa, Otros), " +
                 "importe (número), descripcion (texto breve). " +
@@ -88,10 +123,9 @@ public class GastoService {
                 throw new RuntimeException("Falta la API KEY en .env");
             }
             Client client = Client.builder()
-                                .apiKey(apiKey)
-                                .build();
-            GenerateContentResponse response =
-                client.models.generateContent(
+                    .apiKey(apiKey)
+                    .build();
+            GenerateContentResponse response = client.models.generateContent(
                     "gemini-2.5-flash",
                     prompt,
                     null);

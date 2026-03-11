@@ -12,6 +12,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null); // Guardaremos el JSON aquí
   const [error, setError] = useState('');
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
   const analizarGasto = async () => {
     if (!inputText.trim()) return;
@@ -20,11 +21,9 @@ export default function Home() {
     setError('');
     setResult(null);
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
-
     try {
       // Llamada a tu Backend Spring Boot
-      const response = await fetch(`${apiUrl}/api/gastos/analizar`, {
+      const response = await fetch(`${apiUrl}/api/gastos/generar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'text/plain', // Enviamos texto plano, igual que en Postman
@@ -35,7 +34,11 @@ export default function Home() {
       if (!response.ok) throw new Error('Error al conectar con el servidor');
 
       const data = await response.json();
-      setResult(data);
+      setResult(data.gasto);
+
+      if (data.mensajeAlerta && data.mensajeAlerta !== "Presupuesto bajo control.") {
+        alert(data.mensajeAlerta);
+      }
     } catch (err) {
       setError('No se pudo analizar el gasto. ¿Está el backend encendido?');
       console.error(err);

@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Gasto;
+import com.example.backend.model.GastoResponseDTO;
 import com.example.backend.service.GastoService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +43,10 @@ public class GastoController {
     }
 
     @PostMapping
-    public Gasto save(@RequestBody Gasto gasto) {
-        return gastoService.save(gasto);
+    public GastoResponseDTO generar (@RequestBody Gasto gasto) {
+        Gasto nuevoGasto = gastoService.save(gasto);
+        String alerta = gastoService.comprobarEstadoPresupuesto();
+        return new GastoResponseDTO(nuevoGasto, alerta);
     }
 
     @PutMapping("/{id}")
