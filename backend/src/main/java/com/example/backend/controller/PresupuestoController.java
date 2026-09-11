@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/presupuesto")
-@CrossOrigin(origins = "https://smart-ledger-ai.vercel.app/")
+@CrossOrigin(origins = "https://smart-ledger-ai.vercel.app")
 public class PresupuestoController {
 
     private PresupuestoRepository presupuestoRepository;

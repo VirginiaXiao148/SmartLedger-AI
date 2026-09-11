@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/inversiones")
-@CrossOrigin(origins = "https://smart-ledger-ai.vercel.app/")
+@CrossOrigin(origins = "https://smart-ledger-ai.vercel.app")
 public class InversionController {
 
     private InversionService inversionService;
