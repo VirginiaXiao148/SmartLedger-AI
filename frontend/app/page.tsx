@@ -1,5 +1,6 @@
 'use client'; // Necesario para usar interactividad (useState)
 
+import { Analytics } from "@vercel/analytics/next"
 import { useState } from 'react';
 import { Send, Wallet, Loader2, CheckCircle } from 'lucide-react';
 
@@ -49,6 +50,8 @@ export default function Home() {
 
   return (
     <div className="max-w-2xl mx-auto w-full pt-6">
+      
+      <Analytics />
 
       {/* Título Principal */}
       <div className="mb-10 text-center">
