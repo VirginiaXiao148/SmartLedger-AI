@@ -24,7 +24,7 @@ export default function Home() {
 
     try {
       // Llamada a tu Backend Spring Boot
-      const response = await fetch(`${apiUrl}/api/gastos/generar`, {
+      const response = await fetch(`${apiUrl}/api/gastos/analizar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'text/plain', // Enviamos texto plano, igual que en Postman
