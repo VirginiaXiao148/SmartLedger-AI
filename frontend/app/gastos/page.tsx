@@ -1,10 +1,10 @@
 'use client';
 import { Search, Loader2, RefreshCw } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
-export default function Home(){
+export default function GastosPage() {
 
     const [pagos, setPagos] = useState([]);
     const [busqueda, setBusqueda] = useState('');
@@ -55,6 +55,10 @@ export default function Home(){
             setLoading(false);
         }
     }
+
+    useEffect(() => {
+        fetchPagos();
+    }, []);
 
     return (
         <div className="max-w-4xl mx-auto w-full pt-6">
